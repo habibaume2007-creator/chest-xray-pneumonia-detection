@@ -395,12 +395,18 @@ models/README.md
 
 # Limitations
 
-This project has several limitations:
+Although the proposed ResNet50-based classification approach demonstrates promising performance for chest X-ray pneumonia classification, several limitations should be considered:
 
-- The model was evaluated using a publicly available dataset.
-- Dataset-specific characteristics may affect generalization.
-- External clinical validation is required.
-- The model should not be considered a replacement for professional medical diagnosis.
+- **Dataset Dependency:** The model was developed and evaluated using a publicly available chest X-ray dataset. The characteristics, image quality, and distribution of this dataset may not fully represent real-world clinical environments.
+
+- **Generalization Capability:** The model performance may vary when applied to external datasets collected from different hospitals, imaging devices, patient populations, or clinical settings. External validation is required before practical deployment.
+
+- **Class Imbalance Consideration:** Although weighted loss strategies were investigated to address class imbalance, differences in class distribution may still influence classification performance.
+
+- **Precision–Recall Trade-off:** The experiments achieved very high recall values, indicating strong capability in identifying pneumonia cases. However, high sensitivity may involve an increased risk of false-positive classifications, which requires careful consideration in clinical decision-support applications.
+
+- **Clinical Application:** This model is intended for research and educational purposes. It should not be considered a replacement for professional radiological assessment or clinical diagnosis.
+
 
 ---
 
@@ -408,11 +414,11 @@ This project has several limitations:
 
 Future improvements may include:
 
-- Explainable AI techniques such as Grad-CAM.
-- Evaluation using external clinical datasets.
-- Comparison with advanced classification architectures.
-- Vision Transformer-based classification approaches.
-- Improved robustness through domain adaptation.
+- Evaluation using external clinical chest X-ray datasets to assess generalization performance.
+- Application of explainable AI techniques such as Grad-CAM to improve model interpretability.
+- Investigation of advanced classification architectures, including Vision Transformers.
+- Development of robust models through domain adaptation and multi-center validation.
+- Integration of automated classification systems with clinical decision-support frameworks.
 
 ---
 
