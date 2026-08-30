@@ -174,9 +174,28 @@ NORMAL / PNEUMONIA Prediction
 
 ---
 
-# Experimental Design
+# Experimental Results
 
-Two classification experiments were conducted to investigate the impact of different training strategies.
+Two classification experiments were conducted using the ResNet50 transfer learning classifier to investigate the effect of different loss strategies on pneumonia classification performance.
+
+## Model Performance Comparison
+
+| Evaluation Metric | Experiment 1: Weighted Loss | Experiment 2: Standard Loss |
+|------------------|----------------------------|-----------------------------|
+| Accuracy | 79.49% | 79.97% |
+| Precision | 75.39% | 75.73% |
+| Recall | 99.74% | 100.00% |
+| F1-Score | 85.87% | 86.19% |
+
+### Performance Analysis
+
+The experimental comparison shows that both approaches achieved strong recall performance, indicating effective identification of pneumonia cases.
+
+The Standard Loss approach achieved slightly higher overall performance in terms of accuracy, precision, and F1-score, while the Weighted Loss approach provided comparable classification performance.
+
+Detailed experimental results are available in:
+
+[model_experiment_comparison.csv](results/model_experiment_comparison.csv)
 
 ---
 
