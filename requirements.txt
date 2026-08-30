@@ -1,0 +1,25 @@
+# Deep Learning Framework
+torch
+torchvision
+
+# Data Processing
+numpy
+pandas
+
+# Image Processing
+Pillow
+opencv-python
+
+# Machine Learning Evaluation
+scikit-learn
+
+# Visualization
+matplotlib
+seaborn
+
+# Progress Monitoring
+tqdm
+
+# Notebook Environment
+jupyter
+ipykernel
