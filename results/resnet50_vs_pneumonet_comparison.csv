@@ -1,0 +1,3 @@
+Model,Parameters,Accuracy,Precision,Recall,F1-score
+ResNet50 Transfer Learning,23.5 Million,0.7997,Baseline Result,1.0,0.8619
+PneumoNet-Lite Custom CNN,1.2 Million,0.8846153846153846,0.8697674418604651,0.958974358974359,0.9121951219512195
