@@ -1,440 +1,339 @@
-# Chest X-Ray Pneumonia Classification Using ResNet50 Transfer Learning
+# Chest X-Ray Pneumonia Classification: ResNet50 Baseline vs PneumoNet-Lite Custom CNN
 
-![Python](https://img.shields.io/badge/Python-3.x-blue)
-![PyTorch](https://img.shields.io/badge/Framework-PyTorch-red)
-![Classification](https://img.shields.io/badge/Task-Binary%20Image%20Classification-blue)
-![Medical Imaging](https://img.shields.io/badge/Domain-Medical%20Image%20Analysis-green)
-![Transfer Learning](https://img.shields.io/badge/Method-ResNet50%20Transfer%20Learning-orange)
-![Research Project](https://img.shields.io/badge/Project-Research%20Implementation-purple)
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
+![PyTorch](https://img.shields.io/badge/PyTorch-Framework-red)
+![Computer Vision](https://img.shields.io/badge/Field-Computer%20Vision-green)
+![Medical Image Classification](https://img.shields.io/badge/Task-Medical%20Image%20Classification-purple)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
----
+## Overview
 
-# Project Overview
+This project presents a comparative study of deep learning-based approaches for chest X-ray pneumonia classification.
 
-This repository presents a medical image classification approach for categorizing chest X-ray images into two classes:
+The study evaluates two convolutional neural network approaches:
 
-- **NORMAL**
-- **PNEUMONIA**
+1. **ResNet50 Transfer Learning (Baseline Model)**
+2. **PneumoNet-Lite Custom CNN (Proposed Lightweight Architecture)**
 
-The objective of this research project was to develop and evaluate a binary image classification model capable of distinguishing pneumonia-positive and normal chest X-ray images using a ResNet50 transfer learning approach.
+The objective of this research project is to investigate whether a lightweight custom convolutional neural network can achieve competitive classification performance while significantly reducing model complexity compared with a larger pretrained architecture.
 
-The project demonstrates a complete research workflow, including:
+The models classify chest X-ray images into two categories:
 
-- Dataset exploration
-- Image preprocessing
-- Data augmentation
-- Transfer learning-based classification
-- Experimental comparison of training strategies
-- Model evaluation
-- Performance visualization
-- Classification analysis
+- NORMAL
+- PNEUMONIA
+
 
 ---
 
-# Research Motivation
+# Research Objective
 
-Chest X-ray imaging is one of the most commonly used diagnostic methods for respiratory diseases such as pneumonia. However, accurate interpretation of radiographic images requires expert knowledge and may become challenging due to workload, limited resources, and variations in image interpretation.
+The main research question explored in this project is:
 
-Recent advances in computer vision and deep learning techniques have enabled automated analysis of medical images by learning meaningful visual patterns from image datasets.
+> Can a lightweight custom CNN architecture achieve competitive pneumonia classification performance while using significantly fewer parameters than a ResNet50 transfer learning model?
 
-This research investigates the application of deep learning-based classification techniques for distinguishing pneumonia and normal cases from chest X-ray images.
+The project focuses on:
 
----
+- Chest X-ray image classification
+- CNN architecture development
+- Transfer learning comparison
+- Model efficiency analysis
+- Medical image classification evaluation
 
-# Research Objectives
-
-The main objectives of this project were:
-
-1. To develop a binary classification model for categorizing chest X-ray images into NORMAL and PNEUMONIA classes.
-
-2. To implement ResNet50-based transfer learning for chest X-ray image classification.
-
-3. To investigate the effect of different loss strategies on classification performance.
-
-4. To evaluate model performance using accuracy, precision, recall, F1-score, and confusion matrix analysis.
-
-5. To analyze model behaviour through experimental results and visualization techniques.
 
 ---
 
-# Dataset Description
+# Dataset
 
-## Chest X-Ray Pneumonia Dataset
+This project uses the publicly available **Chest X-Ray Images (Pneumonia) Dataset** from Kaggle.
 
-This project uses the publicly available Chest X-Ray Pneumonia dataset.
+Dataset Source:
 
-The dataset contains labeled chest X-ray images belonging to two categories:
+https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia
+
+The dataset contains two image classes:
 
 | Class | Description |
 |---|---|
 | NORMAL | Chest X-ray images without pneumonia |
 | PNEUMONIA | Chest X-ray images showing pneumonia |
 
-Dataset organization:
+Dataset distribution used in this project:
+
+| Dataset Split | Number of Images |
+|---|---:|
+| Training | 5216 |
+| Validation | 16 |
+| Testing | 624 |
+
+
+---
+
+# Project Structure
 
 ```
-Chest X-Ray Dataset
+chest-xray-pneumonia-detection/
 
-├── Train
-│   ├── NORMAL
-│   └── PNEUMONIA
 │
-├── Validation
-│   ├── NORMAL
-│   └── PNEUMONIA
+├── notebooks/
+│   │
+│   ├── resnet50_baseline_experiment.ipynb
+│   └── pneumonet_lite_custom_cnn.ipynb
 │
-└── Test
-    ├── NORMAL
-    └── PNEUMONIA
-```
-
-The dataset is not included in this repository due to size limitations.
-
----
-
-# Methodology
-
-The classification workflow followed these steps:
-
-```
-Chest X-Ray Images
-
-        ↓
-
-Image Preprocessing
-
-        ↓
-
-Data Augmentation
-
-        ↓
-
-ResNet50 Transfer Learning Classifier
-
-        ↓
-
-Model Training
-
-        ↓
-
-Classification Evaluation
-
-        ↓
-
-Experimental Analysis
+├── models/
+│   │
+│   ├── pneumonet_lite_final.pth
+│   └── README.md
+│
+├── results/
+│   │
+│   ├── resnet50_baseline/
+│   │
+│   └── pneumonet_lite/
+│
+├── requirements.txt
+│
+├── README.md
+│
+└── LICENSE
 ```
 
 ---
 
-# Image Preprocessing
+# Experimental Methodology
 
-Before model training, chest X-ray images were processed using:
+The project was conducted in two experimental stages.
 
-- Image resizing
-- Tensor conversion
-- Pixel normalization
-- Data augmentation techniques
+## Experiment 1: ResNet50 Transfer Learning Baseline
 
-Data augmentation was applied to improve model generalization and reduce overfitting.
+ResNet50 was selected as the baseline architecture due to its established performance in image classification tasks.
 
-The preprocessing pipeline was implemented using PyTorch and Torchvision.
+The pretrained ImageNet model was adapted for binary pneumonia classification.
+
+### Model Details
+
+- Architecture: ResNet50
+- Approach: Transfer Learning
+- Pretrained Backbone: ImageNet
+- Classification Task: Binary Classification
+- Classes:
+  - NORMAL
+  - PNEUMONIA
+
 
 ---
 
-# Classification Model Architecture
+## Experiment 2: PneumoNet-Lite Custom CNN
 
-## ResNet50 Transfer Learning Classifier
+PneumoNet-Lite is a lightweight custom convolutional neural network developed for chest X-ray pneumonia classification.
 
-This project uses ResNet50 as the classification architecture through transfer learning.
+The objective of designing this architecture was to evaluate whether a smaller CNN can achieve strong classification performance with reduced computational complexity.
 
-ResNet50 was selected because:
+### Architecture Components
 
-- It is a well-established convolutional neural network architecture.
-- It provides effective feature extraction capabilities.
-- Pre-trained weights improve learning efficiency.
-- It has demonstrated strong performance in image classification tasks.
+The proposed architecture includes:
 
-The classification architecture follows:
+- Four convolutional feature extraction blocks
+- Batch normalization
+- ReLU activation
+- Max pooling layers
+- Global average pooling
+- Dropout regularization
+- Fully connected classifier
+
+
+Architecture workflow:
 
 ```
 Input Chest X-Ray Image
 
-        ↓
+          ↓
 
-Pre-trained ResNet50 Feature Extractor
+Convolutional Feature Extraction
 
-        ↓
+          ↓
 
-Classification Layer
+Feature Representation
 
-        ↓
+          ↓
+
+Global Average Pooling
+
+          ↓
+
+Fully Connected Classifier
+
+          ↓
 
 NORMAL / PNEUMONIA Prediction
 ```
 
 ---
 
-# Experimental Results
+# Training Configuration
 
-Two classification experiments were conducted using the ResNet50 transfer learning classifier to investigate the effect of different loss strategies on pneumonia classification performance.
+Both experiments were evaluated under comparable settings.
 
-## Model Performance Comparison
-
-| Evaluation Metric | Experiment 1: Weighted Loss | Experiment 2: Standard Loss |
-|------------------|----------------------------|-----------------------------|
-| Accuracy | 79.49% | 79.97% |
-| Precision | 75.39% | 75.73% |
-| Recall | 99.74% | 100.00% |
-| F1-Score | 85.87% | 86.19% |
-
-### Performance Analysis
-
-The experimental comparison shows that both approaches achieved strong recall performance, indicating effective identification of pneumonia cases.
-
-The Standard Loss approach achieved slightly higher overall performance in terms of accuracy, precision, and F1-score, while the Weighted Loss approach provided comparable classification performance.
-
-Detailed experimental results are available in:
-
-[model_experiment_comparison.csv](results/model_experiment_comparison.csv)
-
----
-
-## Experiment 1: Baseline ResNet50 Classification Model
-
-### Objective
-
-To establish baseline classification performance using the standard training approach.
-
-### Configuration
-
-- ResNet50 transfer learning classifier
-- Standard Cross Entropy Loss
-- Adam optimizer
-- Binary image classification framework
-
----
-
-## Experiment 2: Weighted Loss ResNet50 Classification Model
-
-### Objective
-
-To investigate whether class-weighted loss improves classification performance by addressing class imbalance.
-
-### Configuration
-
-- ResNet50 transfer learning classifier
-- Weighted Cross Entropy Loss
-- Same evaluation methodology as baseline experiment
-
----
-
-# Classification Evaluation
-
-The trained models were evaluated using the following metrics:
-
-| Metric | Purpose |
+| Parameter | Value |
 |---|---|
-| Accuracy | Overall classification correctness |
-| Precision | Correctness of positive predictions |
-| Recall | Ability to identify pneumonia cases |
-| F1-score | Balance between precision and recall |
-| Confusion Matrix | Detailed classification performance analysis |
+| Image Size | 224 × 224 |
+| Batch Size | 32 |
+| Optimizer | Adam |
+| Loss Function | Weighted Binary Cross Entropy |
+| Epochs | 50 |
+| Evaluation Metrics | Accuracy, Precision, Recall, F1-score |
+
 
 ---
 
 # Experimental Results
 
-The repository contains the generated experimental artifacts:
+## ResNet50 vs PneumoNet-Lite Comparison
+
+| Model | Parameters | Accuracy | Precision | Recall | F1-score |
+|---|---:|---:|---:|---:|---:|
+| ResNet50 Transfer Learning | ~23.5M | 79.97% | 75.73% | 100% | 86.19% |
+| PneumoNet-Lite Custom CNN | 1.2M | 88.46% | 86.98% | 95.90% | 91.22% |
+
+
+---
+
+# Key Findings
+
+The comparative analysis demonstrated:
+
+- PneumoNet-Lite achieved higher test accuracy compared with the ResNet50 baseline.
+- PneumoNet-Lite achieved a higher F1-score while using significantly fewer parameters.
+- The proposed model contains approximately **1.2 million parameters**, compared with approximately **23.5 million parameters** in ResNet50.
+- The lightweight architecture provides an improved balance between classification performance and computational efficiency.
+
+
+---
+
+# PneumoNet-Lite Results Visualization
+
+## Training and Validation Loss
+
+![Training Validation Loss](results/pneumonet_lite/pneumonet_lite_training_validation_loss.png)
+
+
+## Training and Validation F1-score
+
+![Training Validation F1](results/pneumonet_lite/pneumonet_lite_training_validation_f1.png)
+
+
+## Confusion Matrix
+
+![Confusion Matrix](results/pneumonet_lite/pneumonet_lite_confusion_matrix.png)
+
+
+---
+
+# Results and Artifacts
+
+The repository contains experimental outputs from both models.
 
 ```
 results/
 
-├── confusion_matrix.png
+├── resnet50_baseline/
 
-├── training_validation_loss.png
-
-├── training_validation_f1.png
-
-├── model_experiment_comparison.csv
-
-└── experiment1_history.json
-```
-
-These artifacts provide:
-
-- Confusion matrix analysis
-- Training behaviour visualization
-- F1-score progression
-- Comparison between classification experiments
-- Model training history
-
----
-
-# Repository Structure
-
-```
-chest-xray-pneumonia-detection/
-
-│
-├── README.md
-│
-├── requirements.txt
-│
-├── notebooks/
-│   └── chest_xray_pneumonia_detection.ipynb
-│
-├── results/
 │   ├── confusion_matrix.png
 │   ├── training_validation_loss.png
 │   ├── training_validation_f1.png
-│   ├── model_experiment_comparison.csv
-│   └── experiment1_history.json
-│
-├── models/
-│   └── README.md
-│
-└── dataset/
-    └── README.md
+│   └── model_experiment_comparison.csv
+
+
+└── pneumonet_lite/
+
+    ├── pneumonet_lite_confusion_matrix.png
+    ├── pneumonet_lite_training_validation_loss.png
+    ├── pneumonet_lite_training_validation_f1.png
+    ├── pneumonet_lite_test_metrics.csv
+    └── resnet50_vs_pneumonet_comparison.csv
 ```
 
 ---
 
-# Installation Requirements
+# Model Weights
 
-## Python Environment
+Due to GitHub file size limitations, large model files are documented separately.
 
-Recommended:
-
-```
-Python 3.10+
-```
-
-Install required dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Main libraries used:
-
-```
-PyTorch
-Torchvision
-NumPy
-Pandas
-Scikit-learn
-Matplotlib
-Seaborn
-Pillow
-TQDM
-Jupyter
-```
-
----
-
-# Running the Project
-
-Clone the repository:
-
-```bash
-git clone <repository-url>
-```
-
-Navigate to the project directory:
-
-```bash
-cd chest-xray-pneumonia-detection
-```
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Launch Jupyter Notebook:
-
-```bash
-jupyter notebook
-```
-
-Open:
-
-```
-notebooks/chest_xray_pneumonia_detection.ipynb
-```
-
-The notebook contains:
-
-- Dataset loading
-- Exploratory analysis
-- Image preprocessing
-- Model development
-- Classification experiments
-- Evaluation
-- Results visualization
-
----
-
-# Model Files
-
-The trained model weights are not directly uploaded because of GitHub file size limitations.
-
-The models generated during this research include:
-
-- Final ResNet50 classification model
-- Best experimental checkpoint
-
-Model documentation is available in:
+Model access information is available in:
 
 ```
 models/README.md
+```
+
+Available models:
+
+- PneumoNet-Lite:
+  - Included in repository
+
+- ResNet50:
+  - Hosted externally due to file size limitations
+
+
+---
+
+# Installation and Usage
+
+## Clone Repository
+
+```bash
+git clone https://github.com/habibaume2007-creator/chest-xray-pneumonia-detection
+```
+
+## Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+## Run Experiments
+
+Open the notebooks:
+
+```
+notebooks/
+
+resnet50_baseline_experiment.ipynb
+
+pneumonet_lite_custom_cnn.ipynb
 ```
 
 ---
 
 # Limitations
 
-Although the proposed ResNet50-based classification approach demonstrates promising performance for chest X-ray pneumonia classification, several limitations should be considered:
+This project has several limitations:
 
-- **Dataset Dependency:** The model was developed and evaluated using a publicly available chest X-ray dataset. The characteristics, image quality, and distribution of this dataset may not fully represent real-world clinical environments.
-
-- **Generalization Capability:** The model performance may vary when applied to external datasets collected from different hospitals, imaging devices, patient populations, or clinical settings. External validation is required before practical deployment.
-
-- **Class Imbalance Consideration:** Although weighted loss strategies were investigated to address class imbalance, differences in class distribution may still influence classification performance.
-
-- **Precision–Recall Trade-off:** The experiments achieved very high recall values, indicating strong capability in identifying pneumonia cases. However, high sensitivity may involve an increased risk of false-positive classifications, which requires careful consideration in clinical decision-support applications.
-
-- **Clinical Application:** This model is intended for research and educational purposes. It should not be considered a replacement for professional radiological assessment or clinical diagnosis.
+- The validation subset contains only 16 images, which can cause fluctuations in validation metrics.
+- Experiments were performed using a single dataset.
+- External clinical validation was not performed.
+- The models are intended for research purposes and not clinical deployment.
 
 
 ---
 
-# Future Research Directions
+# Future Work
 
-Future improvements may include:
+Future improvements include:
 
-- Evaluation using external clinical chest X-ray datasets to assess generalization performance.
-- Application of explainable AI techniques such as Grad-CAM to improve model interpretability.
-- Investigation of advanced classification architectures, including Vision Transformers.
-- Development of robust models through domain adaptation and multi-center validation.
-- Integration of automated classification systems with clinical decision-support frameworks.
+- Testing on larger medical imaging datasets
+- Applying explainable AI techniques such as Grad-CAM
+- Exploring attention-based architectures
+- Performing cross-dataset validation
+- Developing optimized lightweight models for healthcare applications
+
 
 ---
 
-# Skills Demonstrated
+# Dataset Reference
 
-This project demonstrates practical experience in:
+Kermany, D. S., Goldbaum, M., Cai, W., et al. (2018).  
+Identifying Medical Diagnoses and Treatable Diseases by Image-Based Deep Learning.  
+Cell, 172(5), 1122–1131.
 
-- Medical image classification
-- Computer vision
-- Deep learning-based classification methods
-- Transfer learning
-- ResNet50 implementation
-- PyTorch framework
-- Experimental analysis
-- Model evaluation
-- Research documentation
 
 ---
 
@@ -442,18 +341,18 @@ This project demonstrates practical experience in:
 
 **Um e Habiba**
 
-Medical Image Classification Research Project
+Computer Vision Research Project  
+Chest X-Ray Pneumonia Classification  
+July 2026
 
-**Chest X-Ray Pneumonia Classification Using ResNet50 Transfer Learning**
+
+GitHub:
+
+https://github.com/habibaume2007-creator
+
 
 ---
 
-# Citation
+# License
 
-If you use this repository for academic purposes, please cite:
-
-```
-Um e Habiba.
-Chest X-Ray Pneumonia Classification Using ResNet50 Transfer Learning.
-GitHub Repository.
-```
+This project is licensed under the MIT License.
